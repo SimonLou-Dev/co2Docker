@@ -114,7 +114,7 @@ services:
         restart: unless-stopped
         volumes:
             - ./docker_configuration/postgresql/initdb:/docker-entrypoint-initdb.d
-            - ./volumes/postgresql:/var/lib/postgresql/data
+            - ./volumes/postgresql:/var/lib/postgresql
         ports:
             - 5432:5432
         environment:
