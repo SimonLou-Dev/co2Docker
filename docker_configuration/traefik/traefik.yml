@@ -7,12 +7,6 @@ entryPoints:
     address: ":80"
   https:
     address: ":443"
-  redis:
-    address: ":6379"
-  postgres:
-    address: ":5432"
-  loraBridge:
-    address: ":1700"
 global: 
   checknewversion: true 
 
