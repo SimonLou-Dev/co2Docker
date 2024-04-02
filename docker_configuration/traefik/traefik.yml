@@ -1,28 +1,27 @@
 api:
-  dashboard: true
+  dashboard: true #Activation du dashboard
 
-
-entryPoints:
+entryPoints: #Liste des points d'entrée
   http:
     address: ":80"
   https:
     address: ":443"
 global: 
-  checknewversion: true 
+  checknewversion: true # Activation de la mise à jour automatique
 
 providers:
   docker:
-    endpoint: "unix:///var/run/docker.sock"   # Listen to the UNIX Docker socket
-    exposedByDefault: false                    # Only expose contaener that are explicitly enabled (using label traefik.enabled)
-    network: "stack-network"                    # Default network to use for connections to all containers.
-    swarmmode: false                           # Activates the Swarm Mode (instead of standalone Docker).
+    endpoint: "unix:///var/run/docker.sock"   # Chemins vers le socket UNIX Docker
+    exposedByDefault: false                    # Désativation de l'exposition de tous les services
+    network: "stack-network"                    # Réseaux utilisé par les conteneurs
+    swarmmode: false                           # Activation de docker swarm
     # Watch Docker Swarm events
   file:
-    filename: "/etc/traefik/config.yml"       # Link to the dynamic configuration
-    watch: true
-  providersThrottleDuration: 10
+    filename: "/etc/traefik/config.yml"       # Liens vers le fichier de configuration
+    watch: true                               # Mise à jour automatique du fichier
+  providersThrottleDuration: 10               # Temps entre chaque vérification
 
 accessLog:
-  filePath: "/var/log/access.log"
+  filePath: "/var/log/access.log" # Log d'accès
 log:
-  filePath: "/var/log/traefik.log"
+  filePath: "/var/log/traefik.log" # Log de traefik
