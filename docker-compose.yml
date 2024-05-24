@@ -10,8 +10,8 @@ services:
         volumes:
             - ./docker_configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
             - ./volumes/mosquitto:/mosquitto
-        expose:
-            - 1883
+        ports:
+            - 1883:1883
     socketi:
         image: quay.io/soketi/soketi:1.4-16-debian
         container_name: socketi
@@ -37,8 +37,8 @@ services:
         image: redis
         container_name: redis
         restart: always
-        expose:
-          - 6379
+        ports:
+          - 6379:6379
         volumes:
             - ./volumes/redis:/data
         networks:
@@ -92,8 +92,8 @@ services:
         image: chirpstack/chirpstack-rest-api:4
         restart: unless-stopped
         command: --server chirpstack:8081 --bind 0.0.0.0:8090 --insecure
-        expose:
-            - 8090
+        ports:
+            - 8090:8090
         depends_on:
             - chirpstack
         networks:
@@ -112,8 +112,8 @@ services:
         volumes:
             - ./docker_configuration/postgresql/initdb:/docker-entrypoint-initdb.d
             - ./volumes/postgresql:/var/lib/postgresql/data
-        expose:
-          - 5432
+        ports:
+          - 5432:5432
         environment:
             - POSTGRES_PASSWORD=root
             - POSTGRES_USER=postgres
