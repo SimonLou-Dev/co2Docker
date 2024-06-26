@@ -23,13 +23,13 @@ services:
                 ipv4_address: 172.20.0.2
         environment:
             - SOKETI_DEFAULT_APP_ID=laravelApp
-            - SOKETI_DEFAULT_APP_KEY=appkey
-            - SOKETI_DEFAULT_APP_SECRET=app-secret
+            - SOKETI_DEFAULT_APP_KEY=
+            - SOKETI_DEFAULT_APP_SECRET=
             - SOKETI_DEBUG=1
         labels:
           - "traefik.enable=true"
           - "traefik.docker.network=stack-network"
-          - "traefik.tcp.routers.socketi.rule=HostSNI(`*`)"
+          - "traefik.tcp.routers.socketi.rule=HostSNI(``)"
           - "traefik.tcp.routers.socketi.service=socketi@docker"
           - "traefik.tcp.services.socketi.loadbalancer.server.port=6001"
           - "traefik.tcp.routers.socketi.entrypoints=socketi"
@@ -115,8 +115,8 @@ services:
         expose:
           - 5432
         environment:
-            - POSTGRES_PASSWORD=root
-            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=
+            - POSTGRES_USER=
         networks:
             stack-network:
                 ipv4_address: 172.20.0.9
